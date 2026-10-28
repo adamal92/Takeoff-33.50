@@ -1,6 +1,6 @@
-using MapApp.Server.Models;
+using SparkySparky.Models;
 
-namespace MapApp.Server.Services;
+namespace SparkySparky.Services;
 
 public interface IPolygonService
 {

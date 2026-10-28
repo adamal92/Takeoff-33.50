@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace MapApp.Server.Models;
+namespace SparkySparky.Models;
 
 public sealed class MapObjectEntity
 {

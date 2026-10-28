@@ -1,4 +1,4 @@
-namespace MapApp.Server.Models;
+namespace SparkySparky.Models;
 
 public sealed class GeoJsonGeometry
 {
