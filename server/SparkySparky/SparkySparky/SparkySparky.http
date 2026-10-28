@@ -1,0 +1,6 @@
+@SparkySparky_HostAddress = http://localhost:5260
+
+GET {{SparkySparky_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
