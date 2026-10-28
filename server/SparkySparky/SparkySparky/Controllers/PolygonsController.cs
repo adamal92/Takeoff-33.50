@@ -1,9 +1,9 @@
-using MapApp.Server.DTOs;
-using MapApp.Server.Models;
-using MapApp.Server.Services;
+using SparkySparky.DTOs;
+using SparkySparky.Models;
+using SparkySparky.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MapApp.Server.Controllers;
+namespace SparkySparky.Controllers;
 
 [ApiController]
 [Route("api/polygons")]

@@ -1,7 +1,7 @@
-using MapApp.Server.Models;
+using SparkySparky.Models;
 using MongoDB.Driver;
 
-namespace MapApp.Server.Services;
+namespace SparkySparky.Services;
 
 public sealed class PolygonService : IPolygonService
 {

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using MapApp.Server.Models;
+using SparkySparky.Models;
 
-namespace MapApp.Server.DTOs;
+namespace SparkySparky.DTOs;
 
 public sealed class CreateMapObjectRequest
 {
