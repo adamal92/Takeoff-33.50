@@ -1,26 +1,47 @@
-const panels = [
-  {
-    number: '02',
-    title: 'Polygons',
-    description: 'Draw and manage areas on the map.',
-    action: 'Add polygon',
-  },
-  {
-    number: '03',
-    title: 'Map objects',
-    description: 'Place markers and custom symbols.',
-    action: 'Add object',
-  },
-]
+import { FeatureTools } from './components/FeatureTools'
+import { MapCanvas } from './components/MapCanvas'
+import { MapDataTable } from './components/MapDataTable'
+import { useMapData } from './hooks/useMapData'
+import { useMapStore } from './store/mapStore'
+import type { CreateMapObject, CreateMapPolygon, FeatureSelection } from './types'
 
 function App() {
+  const {
+    polygons,
+    objects,
+    isLoading,
+    errors,
+    reload,
+    createPolygon,
+    createObject,
+    deleteFeature,
+  } = useMapData()
+  const selection = useMapStore((state) => state.selection)
+
+  const errorsToShow = [
+    ...errors,
+    createPolygon.error,
+    createObject.error,
+    deleteFeature.error,
+  ].filter((error): error is Error => error instanceof Error)
+
+  function savePolygon(polygon: CreateMapPolygon) {
+    createPolygon.mutate(polygon)
+  }
+
+  function saveObject(mapObject: CreateMapObject) {
+    createObject.mutate(mapObject)
+  }
+
+  function deleteMapFeature(feature: FeatureSelection) {
+    deleteFeature.mutate(feature)
+  }
+
   return (
     <main className="workspace">
       <header className="topbar">
         <a className="brand" href="/" aria-label="Boom-Boom home">
-          <span className="brand-mark" aria-hidden="true">
-            b.
-          </span>
+          <span className="brand-mark" aria-hidden="true">b.</span>
           <span>boom-boom</span>
         </a>
         <div className="workspace-label">
@@ -38,14 +59,22 @@ function App() {
           </p>
         </div>
         <div className="coordinate-badge">
-          <span className="coordinate-icon" aria-hidden="true">
-            ◎
-          </span>
+          <span className="coordinate-icon" aria-hidden="true">◎</span>
           <span>WGS 84</span>
           <span className="coordinate-divider" />
           <span>EPSG:4326</span>
         </div>
       </section>
+
+      {errorsToShow.map((error, index) => (
+        <div className="error-banner" role="alert" key={`${error.message}-${index}`}>
+          <div>
+            <strong>Map service error</strong>
+            <span>{error.message}</span>
+          </div>
+          <button type="button" onClick={() => void reload()}>Retry loading data</button>
+        </div>
+      ))}
 
       <div className="dashboard">
         <section className="panel map-panel" aria-labelledby="map-title">
@@ -54,97 +83,41 @@ function App() {
               <span className="panel-number">01</span>
               <h2 id="map-title">Map</h2>
             </div>
-            <span className="panel-tag">INTERACTIVE CANVAS</span>
+            <span className="panel-tag">
+              {isLoading ? 'LOADING MAP DATA' : 'INTERACTIVE CANVAS'}
+            </span>
           </div>
-          <div className="map-placeholder">
-            <div className="map-grid" aria-hidden="true" />
-            <div className="map-crosshair" aria-hidden="true">
-              <span />
-            </div>
-            <div className="map-message">
-              <span className="map-pin" aria-hidden="true">
-                +
-              </span>
-              <p>Map canvas</p>
-              <span>Connect a map layer to get started</span>
-            </div>
-            <span className="map-coordinate map-coordinate-top">
-              32°05&apos;N&nbsp; 34°46&apos;E
-            </span>
-            <span className="map-coordinate map-coordinate-bottom">
-              ZOOM&nbsp; 01
-            </span>
+          <div className="map-view" aria-label="Map panel">
+            <MapCanvas objects={objects} polygons={polygons} />
+            {isLoading && <div className="map-loading">Loading saved features…</div>}
           </div>
           <div className="map-footer">
-            <span><i className="legend-dot" /> No active layers</span>
-            <span>0 FEATURES</span>
+            <span><i className="legend-dot" /> OpenStreetMap</span>
+            <span>{objects.length + polygons.length} FEATURES</span>
           </div>
         </section>
 
-        <section className="panel tools-panel" aria-labelledby="tools-title">
-          <div className="panel-heading">
-            <div className="panel-title">
-              <span className="panel-number">TOOLS</span>
-              <h2 id="tools-title">Create features</h2>
-            </div>
-          </div>
-          <div className="feature-list">
-            {panels.map((panel) => (
-              <article className="feature-card" key={panel.number}>
-                <div className="feature-heading">
-                  <span className="panel-number">{panel.number}</span>
-                  <span className="feature-indicator" aria-hidden="true">
-                    +
-                  </span>
-                </div>
-                <h3>{panel.title}</h3>
-                <p>{panel.description}</p>
-                <button type="button" disabled>
-                  {panel.action}
-                  <span aria-hidden="true">↗</span>
-                </button>
-              </article>
-            ))}
-          </div>
-          <p className="tools-note">Map tools will be available when the map is connected.</p>
-        </section>
+        <FeatureTools
+          objectCount={objects.length}
+          polygonCount={polygons.length}
+          onCreateObject={saveObject}
+          onCreatePolygon={savePolygon}
+          objectSaving={createObject.isPending}
+          polygonSaving={createPolygon.isPending}
+        />
 
-        <section className="panel data-panel" aria-labelledby="data-title">
-          <div className="panel-heading">
-            <div className="panel-title">
-              <span className="panel-number">04</span>
-              <h2 id="data-title">Map data</h2>
-            </div>
-            <span className="count-badge">0</span>
-          </div>
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">OBJECT</th>
-                  <th scope="col">LAT</th>
-                  <th scope="col">LON</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td colSpan={3}>
-                    <div className="empty-data">
-                      <span aria-hidden="true">—</span>
-                      <p>No map data yet</p>
-                      <small>Saved objects will appear here.</small>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
+        <MapDataTable
+          objects={objects}
+          polygons={polygons}
+          selection={selection}
+          onDelete={deleteMapFeature}
+          deleting={deleteFeature.isPending}
+        />
       </div>
 
       <footer className="page-footer">
         <span>BOOM-BOOM <span className="footer-separator">/</span> GIS CLIENT</span>
-        <span>MAP DATA STAYS IN SYNC WITH YOUR WORKSPACE</span>
+        <span>GEOJSON COORDINATES <span className="footer-separator">/</span> LONGITUDE, LATITUDE</span>
       </footer>
     </main>
   )
