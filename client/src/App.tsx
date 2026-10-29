@@ -40,9 +40,9 @@ function App() {
   return (
     <main className="workspace">
       <header className="topbar">
-        <a className="brand" href="/" aria-label="Boom-Boom home">
-          <span className="brand-mark" aria-hidden="true">b.</span>
-          <span>boom-boom</span>
+        <a className="brand" href="/" aria-label="Takeoff-33.50 home">
+          <span className="brand-mark" aria-hidden="true">T.</span>
+          <span>Takeoff-33.50</span>
         </a>
         <div className="workspace-label">
           <span className="status-dot" />
