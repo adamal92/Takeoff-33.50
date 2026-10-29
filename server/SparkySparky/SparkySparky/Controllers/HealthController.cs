@@ -5,6 +5,7 @@ namespace SparkySparky.Controllers;
 
 [ApiController]
 [Route("api/health")]
+[Route("health")]
 public sealed class HealthController : ControllerBase
 {
     private readonly IMongoHealthChecker mongoHealthChecker;
