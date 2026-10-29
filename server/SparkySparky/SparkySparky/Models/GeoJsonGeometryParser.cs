@@ -16,15 +16,11 @@ public static class GeoJsonGeometryParser
             return false;
         }
 
-        var values = geometry.Coordinates.EnumerateArray().ToArray();
-        if (values.Length != 2
-            || !values[0].TryGetDouble(out var longitude)
-            || !values[1].TryGetDouble(out var latitude))
+        if (!TryParsePosition(geometry.Coordinates, out coordinates))
         {
             return false;
         }
 
-        coordinates = [longitude, latitude];
         return true;
     }
 
@@ -113,6 +109,7 @@ public static class GeoJsonGeometryParser
 
         var values = element.EnumerateArray().ToArray();
         if (values.Length != 2
+            || values.Any(value => value.ValueKind != JsonValueKind.Number)
             || !values[0].TryGetDouble(out var longitude)
             || !values[1].TryGetDouble(out var latitude))
         {

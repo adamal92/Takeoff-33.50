@@ -13,6 +13,7 @@ var mongoConnectionString = builder.Configuration["MongoDb:ConnectionString"]
 
 builder.Services.AddSingleton<IMongoClient>(
     new MongoClient(mongoConnectionString));
+builder.Services.AddSingleton<IMongoHealthChecker, MongoHealthChecker>();
 
 builder.Services.AddCors(options =>
 {
