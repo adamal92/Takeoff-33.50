@@ -1,18 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
-using MongoDB.Driver;
+using SparkySparky.Services;
 
 namespace SparkySparky.Controllers;
 
 [ApiController]
 [Route("api/health")]
+[Route("health")]
 public sealed class HealthController : ControllerBase
 {
-    private readonly IMongoClient mongoClient;
+    private readonly IMongoHealthChecker mongoHealthChecker;
 
-    public HealthController(IMongoClient mongoClient)
+    public HealthController(IMongoHealthChecker mongoHealthChecker)
     {
-        this.mongoClient = mongoClient;
+        this.mongoHealthChecker = mongoHealthChecker;
     }
 
     [HttpGet("is-alive")]
@@ -24,15 +24,7 @@ public sealed class HealthController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetHealth(CancellationToken cancellationToken)
     {
-        try
-        {
-            await mongoClient
-                .GetDatabase("admin")
-                .RunCommandAsync<BsonDocument>(
-                    new BsonDocument("ping", 1),
-                    cancellationToken: cancellationToken);
-        }
-        catch (MongoException)
+        if (!await mongoHealthChecker.IsHealthyAsync(cancellationToken))
         {
             return StatusCode(
                 StatusCodes.Status503ServiceUnavailable,

@@ -13,6 +13,7 @@ var mongoConnectionString = builder.Configuration["MongoDb:ConnectionString"]
 
 builder.Services.AddSingleton<IMongoClient>(
     new MongoClient(mongoConnectionString));
+builder.Services.AddSingleton<IMongoHealthChecker, MongoHealthChecker>();
 
 builder.Services.AddCors(options =>
 {
@@ -35,13 +36,14 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseHttpsRedirection();
+//}
+
 app.UseCors("Frontend");
 app.MapControllers();
 
