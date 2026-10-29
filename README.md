@@ -20,4 +20,6 @@ docker compose up --build
 Open the client at <http://localhost>. The API is available at
 <http://localhost:5260>. MongoDB data persists in the `mongodb-data` volume.
 Set `MONGODB_CONNECTION_STRING` in the environment to use a different MongoDB
-connection string. Stop the services with `docker compose down`.
+connection string. Client source maps are disabled by default; set
+`VITE_SOURCEMAP=true` in the environment when building to enable them. Stop the
+services with `docker compose down`.
