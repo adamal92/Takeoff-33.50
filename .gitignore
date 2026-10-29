@@ -429,3 +429,4 @@ FodyWeavers.xsd
 
 # some of my own stuff
 temp/
+*Takeoff*.txt
