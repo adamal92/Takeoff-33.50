@@ -1,0 +1,35 @@
+services:
+  client:
+    build:
+      context: ./client
+      args:
+        VITE_API_BASE_URL: http://localhost:5260
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: ./server/SparkySparky
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      MongoDb__ConnectionString: ${MONGODB_CONNECTION_STRING:-mongodb://mongodb:27017}
+    ports:
+      - "5260:8080"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+  mongodb:
+    image: mongo:7.0
+    volumes:
+      - mongodb-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mongodb-data:
