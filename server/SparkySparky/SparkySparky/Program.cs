@@ -1,10 +1,18 @@
 using SparkySparky.Services;
 using SparkySparky.DTOs;
 using SparkySparky.Models;
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
+var mongoConnectionString = builder.Configuration["MongoDb:ConnectionString"]
+    ?? throw new InvalidOperationException(
+        "MongoDb:ConnectionString is missing.");
+
+builder.Services.AddSingleton<IMongoClient>(
+    new MongoClient(mongoConnectionString));
 
 builder.Services.AddCors(options =>
 {
