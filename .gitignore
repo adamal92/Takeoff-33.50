@@ -11,6 +11,9 @@
 *.sln.docstates
 *.env
 
+# Local MongoDB credentials
+/server/SparkySparky/SparkySparky/appsettings.Local.json
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
