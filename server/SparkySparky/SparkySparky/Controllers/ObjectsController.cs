@@ -67,11 +67,8 @@ public sealed class ObjectsController : ControllerBase
 
     private static bool IsValidPoint(GeoJsonGeometry geometry)
     {
-        return string.Equals(
-                   geometry.Type,
-                   "Point",
-                   StringComparison.OrdinalIgnoreCase)
-               && geometry.Coordinates.Length == 1
-               && geometry.Coordinates[0].Length == 2;
+        return GeoJsonGeometryParser.TryParsePoint(
+            geometry,
+            out _);
     }
 }

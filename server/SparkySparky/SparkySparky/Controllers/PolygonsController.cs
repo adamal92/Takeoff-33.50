@@ -66,18 +66,8 @@ public sealed class PolygonsController : ControllerBase
 
     private static bool IsValidPolygon(GeoJsonGeometry geometry)
     {
-        if (!string.Equals(geometry.Type, "Polygon", StringComparison.OrdinalIgnoreCase)
-            || geometry.Coordinates.Length == 0)
-        {
-            return false;
-        }
-
-        var ring = geometry.Coordinates[0];
-
-        return ring.Length >= 4
-            && ring[0].Length == 2
-            && ring[^1].Length == 2
-            && ring[0][0] == ring[^1][0]
-            && ring[0][1] == ring[^1][1];
+        return GeoJsonGeometryParser.TryParsePolygon(
+            geometry,
+            out _);
     }
 }
