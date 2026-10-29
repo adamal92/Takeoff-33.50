@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace SparkySparky.Models;
 
 public sealed class GeoJsonGeometry
@@ -5,5 +7,5 @@ public sealed class GeoJsonGeometry
     public required string Type { get; init; }
 
     // GeoJSON coordinate order is [longitude, latitude].
-    public required double[][] Coordinates { get; init; }
+    public required JsonElement Coordinates { get; init; }
 }
