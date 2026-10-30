@@ -12,7 +12,7 @@ services:
 
   server:
     build:
-      context: ./server/SparkySparky
+      context: ./server/SparkySparky/SparkySparky
     environment:
       ASPNETCORE_URLS: http://+:8080
       MongoDb__ConnectionString: ${MONGODB_CONNECTION_STRING:-mongodb://mongodb:27017}
