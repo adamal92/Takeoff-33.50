@@ -14,10 +14,10 @@ ENV ASPNETCORE_URLS=http://0.0.0.0:8080;http://0.0.0.0:5260
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["SparkySparky/SparkySparky.csproj", "SparkySparky/"]
-RUN dotnet restore "./SparkySparky/SparkySparky.csproj"
+COPY ["SparkySparky.csproj", "./"]
+RUN dotnet restore "./SparkySparky.csproj"
 COPY . .
-WORKDIR "/src/SparkySparky"
+WORKDIR "/src"
 RUN dotnet build "./SparkySparky.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage

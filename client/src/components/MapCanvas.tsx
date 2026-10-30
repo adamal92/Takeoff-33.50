@@ -1,5 +1,6 @@
 import L from 'leaflet'
 import { useEffect } from 'react'
+import jeepIcon from '../assets/jeep.svg'
 import {
   MapContainer,
   Marker,
@@ -22,7 +23,7 @@ const objectIcons: Record<string, L.DivIcon> = {
   }),
   jeep: L.divIcon({
     className: 'object-marker object-marker--jeep',
-    html: '<span>J</span>',
+    html: `<img src="${jeepIcon}" alt="" />`,
     iconSize: [30, 30],
     iconAnchor: [15, 15],
   }),
