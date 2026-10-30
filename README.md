@@ -1,25 +1,94 @@
 # Takeoff-33.50
 
-Takeoff-33.50 is a full-stack geospatial dashboard built as an interview project for IAI. It demonstrates a map-centric workflow inspired by C4I systems: users can create, view, select, and delete map objects and polygon areas. It is a demonstration project, not an operational IAI system.
+Takeoff-33.50 is a geospatial dashboard for creating, viewing, and deleting map
+polygons and point objects. It is a demonstration project, not an operational
+system.
 
-## Project overview
+The application consists of a React/TypeScript client, an ASP.NET Core Web API,
+and MongoDB. Spatial data is exchanged as GeoJSON using WGS 84 (EPSG:4326), with
+coordinates ordered as `[longitude, latitude]`.
 
-- **Client:** React, TypeScript, and Leaflet provide an interactive map centered on Tel Aviv, tools for placing point objects and drawing polygon boundaries, and a table of saved features. React Query manages API data and mutations; Zustand holds the current tool, drafts, and selection.
-- **Server:** An ASP.NET Core 8 Web API exposes endpoints for listing, creating, and deleting objects and polygons. It validates GeoJSON geometries and persists the features in MongoDB, with 2dsphere indexes on their geometries.
-- **Spatial data:** Features use GeoJSON in WGS 84 (EPSG:4326), with coordinates ordered as longitude, latitude.
-- **Deployment:** Docker Compose starts the client, API, and MongoDB together. MongoDB data is retained in a named volume.
+## Features
 
-## Run with Docker Compose
+- Draw and save polygon areas on an interactive Leaflet map.
+- Place and save point objects with marker or jeep symbols.
+- Select and inspect saved features; delete them from the map data table.
+- Store polygon and point data in MongoDB with 2dsphere indexes.
+- Check API liveness and MongoDB connectivity with health endpoints.
 
-From the repository root, start the client, API, and MongoDB:
+The API also exposes `PUT` endpoints for updating saved features. The current
+client does not yet include an edit workflow.
+
+## Use the map
+
+- **Draw a polygon:** choose **Add polygon**, click the map to add at least
+  three vertices, choose **Finish polygon**, name the draft, and save it.
+- **Place an object:** choose a name and symbol, select **Place object**, click
+  the map, then save the point.
+- **Inspect or delete a feature:** select it on the map or in the data table.
+  Use the row's **Delete** action to remove it.
+
+## Run the full application
+
+Requirements: Docker with the Compose plugin.
+
+From the repository root:
 
 ```sh
 docker compose up --build
 ```
 
-Open the client at <http://localhost>. The API is available at
-<http://localhost:5260>. MongoDB data persists in the `mongodb-data` volume.
-Set `MONGODB_CONNECTION_STRING` in the environment to use a different MongoDB
-connection string. Client source maps are disabled by default; set
-`VITE_SOURCEMAP=true` in the environment when building to enable them. Stop the
-services with `docker compose down`.
+Open the client at <http://localhost>, the API at <http://localhost:5260>, and
+the Swagger UI at <http://localhost:5260/swagger>. Compose starts MongoDB and
+waits for its health check before starting the API.
+
+The default Compose configuration uses the MongoDB container and stores data
+in the `mongodb-data` named volume. To connect the API to a different MongoDB
+deployment, set `MONGODB_CONNECTION_STRING` in the environment before running
+Compose. Never commit credentials or connection strings.
+
+Stop the containers with `docker compose down`. This preserves the database
+volume. Removing the volume (for example, with `docker compose down --volumes`)
+permanently deletes the data stored in it.
+
+## Run the client against the containerized API
+
+This workflow is useful when developing the client while keeping the API and
+MongoDB in Docker.
+
+1. In a terminal at the repository root, start the database and API:
+
+   ```sh
+   docker compose up --build mongodb server
+   ```
+
+2. In a second terminal, start the client:
+
+   ```sh
+   cd client
+   corepack pnpm install --frozen-lockfile
+   corepack pnpm dev
+   ```
+
+3. Open <http://localhost:5173>. The client defaults to
+   `http://localhost:5260` for its API. To override that URL, set
+   `VITE_API_BASE_URL` in `client/.env.development` (see
+   [`client/.env.example`](client/.env.example)).
+
+Use HTTP for both local client and API unless you have explicitly configured
+HTTPS certificates and endpoints. See the [development guide](docs/development.md)
+for configuration and troubleshooting.
+
+## Documentation
+
+- [Architecture and data flow](docs/architecture.md)
+- [HTTP API reference](docs/api.md)
+- [Development, configuration, and tests](docs/development.md)
+
+## Technology
+
+- **Client:** React 19, TypeScript, Vite, Leaflet / React Leaflet, TanStack
+  Query, Zustand, and Vitest.
+- **Server:** ASP.NET Core 8, MongoDB.Driver, and Swagger / Swashbuckle.
+- **Persistence:** MongoDB with GeoJSON geometry fields and 2dsphere indexes.
+- **Containers:** Docker Compose, Nginx for the built client, and MongoDB 7.
