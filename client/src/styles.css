@@ -314,6 +314,12 @@ h1 {
   transform: rotate(45deg);
 }
 
+.object-marker img {
+  width: 20px;
+  height: 20px;
+  transform: rotate(45deg);
+}
+
 .object-marker--jeep {
   background: #f3c86a;
 }
