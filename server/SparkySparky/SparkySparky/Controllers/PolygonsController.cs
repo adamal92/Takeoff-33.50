@@ -52,6 +52,31 @@ public sealed class PolygonsController : ControllerBase
             created);
     }
 
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(
+        string id,
+        CreatePolygonRequest request,
+        CancellationToken cancellationToken)
+    {
+        if (!IsValidPolygon(request.Geometry))
+        {
+            return BadRequest(
+                "A polygon must contain at least four coordinates and be closed.");
+        }
+
+        var updated = await polygonService.UpdateAsync(
+            new PolygonEntity
+            {
+                Id = id,
+                Name = request.Name,
+                Geometry = request.Geometry,
+                CreatedAt = DateTime.UtcNow
+            },
+            cancellationToken);
+
+        return updated ? NoContent() : NotFound();
+    }
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(
         string id,
@@ -66,18 +91,8 @@ public sealed class PolygonsController : ControllerBase
 
     private static bool IsValidPolygon(GeoJsonGeometry geometry)
     {
-        if (!string.Equals(geometry.Type, "Polygon", StringComparison.OrdinalIgnoreCase)
-            || geometry.Coordinates.Length == 0)
-        {
-            return false;
-        }
-
-        var ring = geometry.Coordinates[0];
-
-        return ring.Length >= 4
-            && ring[0].Length == 2
-            && ring[^1].Length == 2
-            && ring[0][0] == ring[^1][0]
-            && ring[0][1] == ring[^1][1];
+        return GeoJsonGeometryParser.TryParsePolygon(
+            geometry,
+            out _);
     }
 }

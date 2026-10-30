@@ -8,7 +8,9 @@ RUN pnpm install --frozen-lockfile
 
 COPY . .
 ARG VITE_API_BASE_URL=http://localhost:5260
+ARG VITE_SOURCEMAP=false
 ENV VITE_API_BASE_URL=${VITE_API_BASE_URL}
+ENV VITE_SOURCEMAP=${VITE_SOURCEMAP}
 RUN pnpm build
 
 FROM nginx:1.27-alpine

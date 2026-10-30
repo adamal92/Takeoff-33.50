@@ -1,11 +1,19 @@
 using SparkySparky.Services;
 using SparkySparky.DTOs;
 using SparkySparky.Models;
-using SparkySparky.Services;
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
+var mongoConnectionString = builder.Configuration["MongoDb:ConnectionString"]
+    ?? throw new InvalidOperationException(
+        "MongoDb:ConnectionString is missing.");
+
+builder.Services.AddSingleton<IMongoClient>(
+    new MongoClient(mongoConnectionString));
+builder.Services.AddSingleton<IMongoHealthChecker, MongoHealthChecker>();
 
 builder.Services.AddCors(options =>
 {
@@ -14,7 +22,11 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy
-                .WithOrigins("http://localhost:5173", "http://localhost")
+                .SetIsOriginAllowed(origin =>
+                    Uri.TryCreate(origin, UriKind.Absolute, out var uri)
+                    && uri.IsLoopback
+                    && (uri.Scheme == Uri.UriSchemeHttp
+                        || uri.Scheme == Uri.UriSchemeHttps))
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
@@ -28,29 +40,12 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
+
 app.UseCors("Frontend");
 app.MapControllers();
 
 app.Run();
-
-app.MapControllers();
-app.MapGroup("/api/polygons")
-    .WithTags("Polygons")
-    .MapMethods("GET", "POST", "DELETE", "/polygons/{id}", async (IMiddleware mediator, HttpContext http, string id) =>
-    {
-        return Results.NotFound();
-    });
-
-app.MapGroup("/api/objects")
-    .WithTags("Objects")
-    .MapMethods("GET", "POST", "DELETE", "/objects/{id}", async (IMiddleware mediator, HttpContext http, string id) =>
-    {
-        return Results.NotFound();
-    });
