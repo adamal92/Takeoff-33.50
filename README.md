@@ -1,5 +1,7 @@
 # Takeoff-33.50
 
+[![CI](https://github.com/adamal92/Takeoff-33.50/actions/workflows/ci.yml/badge.svg)](https://github.com/adamal92/Takeoff-33.50/actions/workflows/ci.yml)
+
 Takeoff-33.50 is a geospatial dashboard for creating, viewing, and deleting map
 polygons and point objects. It is a demonstration project, not an operational
 system.
@@ -84,6 +86,7 @@ for configuration and troubleshooting.
 - [Architecture and data flow](docs/architecture.md)
 - [HTTP API reference](docs/api.md)
 - [Development, configuration, and tests](docs/development.md)
+- [Continuous integration](.github/workflows/ci.yml)
 
 ## Technology
 
