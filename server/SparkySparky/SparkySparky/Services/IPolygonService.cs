@@ -11,6 +11,10 @@ public interface IPolygonService
         PolygonEntity polygon,
         CancellationToken cancellationToken);
 
+    Task<bool> UpdateAsync(
+        PolygonEntity polygon,
+        CancellationToken cancellationToken);
+
     Task<bool> DeleteAsync(
         string id,
         CancellationToken cancellationToken);
