@@ -22,7 +22,11 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy
-                .WithOrigins("http://localhost:5173", "http://localhost")
+                .SetIsOriginAllowed(origin =>
+                    Uri.TryCreate(origin, UriKind.Absolute, out var uri)
+                    && uri.IsLoopback
+                    && (uri.Scheme == Uri.UriSchemeHttp
+                        || uri.Scheme == Uri.UriSchemeHttps))
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
@@ -39,13 +43,9 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseHttpsRedirection();
-//}
+//app.UseHttpsRedirection();
 
 app.UseCors("Frontend");
 app.MapControllers();
 
 app.Run();
-

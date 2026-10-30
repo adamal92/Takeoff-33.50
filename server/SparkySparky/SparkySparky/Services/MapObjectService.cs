@@ -51,6 +51,27 @@ public sealed class MapObjectService : IMapObjectService
         return mapObject;
     }
 
+    public async Task<bool> UpdateAsync(
+        MapObjectEntity mapObject,
+        CancellationToken cancellationToken)
+    {
+        if (!MongoDB.Bson.ObjectId.TryParse(mapObject.Id, out _))
+        {
+            return false;
+        }
+
+        var updates = Builders<MapObjectEntity>.Update
+            .Set(existingObject => existingObject.Name, mapObject.Name)
+            .Set(existingObject => existingObject.SymbolType, mapObject.SymbolType)
+            .Set(existingObject => existingObject.Geometry, mapObject.Geometry);
+        var result = await collection.UpdateOneAsync(
+            existingObject => existingObject.Id == mapObject.Id,
+            updates,
+            cancellationToken: cancellationToken);
+
+        return result.MatchedCount > 0;
+    }
+
     public async Task<bool> DeleteAsync(
         string id,
         CancellationToken cancellationToken)

@@ -51,6 +51,26 @@ public sealed class PolygonService : IPolygonService
         return polygon;
     }
 
+    public async Task<bool> UpdateAsync(
+        PolygonEntity polygon,
+        CancellationToken cancellationToken)
+    {
+        if (!MongoDB.Bson.ObjectId.TryParse(polygon.Id, out _))
+        {
+            return false;
+        }
+
+        var updates = Builders<PolygonEntity>.Update
+            .Set(existingPolygon => existingPolygon.Name, polygon.Name)
+            .Set(existingPolygon => existingPolygon.Geometry, polygon.Geometry);
+        var result = await collection.UpdateOneAsync(
+            existingPolygon => existingPolygon.Id == polygon.Id,
+            updates,
+            cancellationToken: cancellationToken);
+
+        return result.MatchedCount > 0;
+    }
+
     public async Task<bool> DeleteAsync(
         string id,
         CancellationToken cancellationToken)

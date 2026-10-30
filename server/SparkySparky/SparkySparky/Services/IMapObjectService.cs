@@ -11,6 +11,10 @@ public interface IMapObjectService
         MapObjectEntity mapObject,
         CancellationToken cancellationToken);
 
+    Task<bool> UpdateAsync(
+        MapObjectEntity mapObject,
+        CancellationToken cancellationToken);
+
     Task<bool> DeleteAsync(
         string id,
         CancellationToken cancellationToken);
