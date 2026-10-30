@@ -53,6 +53,31 @@ public sealed class ObjectsController : ControllerBase
             created);
     }
 
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(
+        string id,
+        CreateMapObjectRequest request,
+        CancellationToken cancellationToken)
+    {
+        if (!IsValidPoint(request.Geometry))
+        {
+            return BadRequest("An object must have valid Point coordinates.");
+        }
+
+        var updated = await mapObjectService.UpdateAsync(
+            new MapObjectEntity
+            {
+                Id = id,
+                Name = request.Name,
+                SymbolType = request.SymbolType,
+                Geometry = request.Geometry,
+                CreatedAt = DateTime.UtcNow
+            },
+            cancellationToken);
+
+        return updated ? NoContent() : NotFound();
+    }
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(
         string id,

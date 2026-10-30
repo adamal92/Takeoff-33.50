@@ -52,6 +52,31 @@ public sealed class PolygonsController : ControllerBase
             created);
     }
 
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(
+        string id,
+        CreatePolygonRequest request,
+        CancellationToken cancellationToken)
+    {
+        if (!IsValidPolygon(request.Geometry))
+        {
+            return BadRequest(
+                "A polygon must contain at least four coordinates and be closed.");
+        }
+
+        var updated = await polygonService.UpdateAsync(
+            new PolygonEntity
+            {
+                Id = id,
+                Name = request.Name,
+                Geometry = request.Geometry,
+                CreatedAt = DateTime.UtcNow
+            },
+            cancellationToken);
+
+        return updated ? NoContent() : NotFound();
+    }
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(
         string id,
