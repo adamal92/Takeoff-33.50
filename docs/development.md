@@ -126,9 +126,30 @@ Run the backend test suite from the repository root:
 dotnet test server/SparkySparky/SparkySparky.sln
 ```
 
-Backend CRUD integration tests start a temporary MongoDB instance with
-Mongo2Go; they do not use the application's development database. The suite
-also covers geometry parsing and health-controller behavior.
+Server HTTP integration tests host the real API and use a temporary MongoDB
+instance with Mongo2Go. They cover the REST contract, validation, shared Mongo
+client registration, and polygon/object persistence without using the
+development database.
+
+The client-to-server integration test uses the real client API module and
+requires a running API connected to MongoDB. Run the full-stack test locally
+after starting the MongoDB and API services with Docker Compose:
+
+```sh
+docker compose up --build mongodb server
+```
+
+In another terminal, from `client/`, run:
+
+```sh
+$env:VITE_RUN_API_INTEGRATION_TESTS = 'true'
+$env:VITE_API_BASE_URL = 'http://localhost:5260'
+corepack pnpm exec vitest run src/services/api.integration.test.ts
+```
+
+The full-stack test creates uniquely named polygon and object records, verifies
+the API responses and subsequent list responses, then deletes the records.
+CI runs this test against a temporary MongoDB service.
 
 ## Project layout
 
