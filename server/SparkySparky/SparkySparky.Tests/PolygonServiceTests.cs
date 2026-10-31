@@ -1,4 +1,5 @@
 using System.Text.Json;
+using MongoDB.Driver;
 using SparkySparky.Models;
 using SparkySparky.Services;
 
@@ -17,7 +18,9 @@ public sealed class PolygonServiceTests : IClassFixture<MongoDbFixture>
     public async Task PolygonCrud_PersistsAndReadsValidGeoJson()
     {
         var databaseName = mongo.CreateDatabaseName();
-        var service = new PolygonService(mongo.CreateConfiguration(databaseName));
+        var service = new PolygonService(
+            new MongoClient(mongo.ConnectionString),
+            mongo.CreateConfiguration(databaseName));
         var cancellationToken = CancellationToken.None;
 
         try

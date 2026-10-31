@@ -50,3 +50,66 @@ jobs:
 
       - name: Run .NET tests
         run: dotnet test server/SparkySparky/SparkySparky.sln --configuration Release
+
+  full-stack-tests:
+    name: Full-stack integration tests
+    runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo:7.0
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.adminCommand(\"ping\").ok'"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      MongoDb__ConnectionString: mongodb://localhost:27017
+      MongoDb__DatabaseName: takeoff-integration
+      ASPNETCORE_URLS: http://localhost:5260
+      VITE_API_BASE_URL: http://localhost:5260
+      VITE_RUN_API_INTEGRATION_TESTS: 'true'
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12.16.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: client/pnpm-lock.yaml
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install client dependencies
+        working-directory: client
+        run: pnpm install --frozen-lockfile
+
+      - name: Build API
+        run: dotnet build server/SparkySparky/SparkySparky/SparkySparky.csproj --configuration Release
+
+      - name: Start API and wait for MongoDB
+        run: |
+          dotnet run --no-build --configuration Release --project server/SparkySparky/SparkySparky/SparkySparky.csproj > /tmp/takeoff-api.log 2>&1 &
+          for attempt in {1..30}; do
+            if curl --fail --silent http://localhost:5260/api/health; then
+              exit 0
+            fi
+            sleep 2
+          done
+          cat /tmp/takeoff-api.log
+          exit 1
+
+      - name: Run client against API and MongoDB
+        working-directory: client
+        run: pnpm exec vitest run src/services/api.integration.test.ts

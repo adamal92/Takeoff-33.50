@@ -7,12 +7,10 @@ public sealed class PolygonService : IPolygonService
 {
     private readonly IMongoCollection<PolygonEntity> collection;
 
-    public PolygonService(IConfiguration configuration)
+    public PolygonService(
+        IMongoClient mongoClient,
+        IConfiguration configuration)
     {
-        var connectionString = configuration["MongoDb:ConnectionString"]
-            ?? throw new InvalidOperationException(
-                "MongoDb:ConnectionString is missing.");
-
         var databaseName = configuration["MongoDb:DatabaseName"]
             ?? throw new InvalidOperationException(
                 "MongoDb:DatabaseName is missing.");
@@ -20,8 +18,7 @@ public sealed class PolygonService : IPolygonService
         var collectionName = configuration["MongoDb:PolygonsCollectionName"]
             ?? "polygons";
 
-        var client = new MongoClient(connectionString);
-        var database = client.GetDatabase(databaseName);
+        var database = mongoClient.GetDatabase(databaseName);
 
         collection = database.GetCollection<PolygonEntity>(collectionName);
 

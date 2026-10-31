@@ -7,12 +7,10 @@ public sealed class MapObjectService : IMapObjectService
 {
     private readonly IMongoCollection<MapObjectEntity> collection;
 
-    public MapObjectService(IConfiguration configuration)
+    public MapObjectService(
+        IMongoClient mongoClient,
+        IConfiguration configuration)
     {
-        var connectionString = configuration["MongoDb:ConnectionString"]
-            ?? throw new InvalidOperationException(
-                "MongoDb:ConnectionString is missing.");
-
         var databaseName = configuration["MongoDb:DatabaseName"]
             ?? throw new InvalidOperationException(
                 "MongoDb:DatabaseName is missing.");
@@ -20,8 +18,7 @@ public sealed class MapObjectService : IMapObjectService
         var collectionName = configuration["MongoDb:ObjectsCollectionName"]
             ?? "objects";
 
-        var client = new MongoClient(connectionString);
-        var database = client.GetDatabase(databaseName);
+        var database = mongoClient.GetDatabase(databaseName);
 
         collection = database.GetCollection<MapObjectEntity>(collectionName);
 
