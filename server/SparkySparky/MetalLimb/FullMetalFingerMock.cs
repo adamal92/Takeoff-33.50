@@ -1,6 +1,6 @@
 ﻿namespace MetalLimb
 {
-    public class FullMetalFingerMock
+    public sealed class FullMetalFingerMock : IFullMetalFingerMock
     {
         public void SensorIsAlive()
         {

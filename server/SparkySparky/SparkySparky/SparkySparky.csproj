@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MetalLimb\MetalLimb.csproj" />
     <ProjectReference Include="..\TheThirdEye\TheThirdEye.csproj" />
   </ItemGroup>
 

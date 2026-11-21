@@ -35,6 +35,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddSingleton<IPolygonService, PolygonService>();
 builder.Services.AddSingleton<IMapObjectService, MapObjectService>();
 builder.Services.AddSingleton<INeedleService, NeedleService>();
+builder.Services.AddSingleton<IMetalLimbService, MetalLimbService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
