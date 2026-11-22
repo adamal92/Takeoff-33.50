@@ -2,6 +2,7 @@ using SparkySparky.Services;
 using SparkySparky.DTOs;
 using SparkySparky.Models;
 using MongoDB.Driver;
+using MetalLimb;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +36,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddSingleton<IPolygonService, PolygonService>();
 builder.Services.AddSingleton<IMapObjectService, MapObjectService>();
 builder.Services.AddSingleton<INeedleService, NeedleService>();
+builder.Services.AddSingleton<IFullMetalFingerMock, FullMetalFingerMock>();
 builder.Services.AddSingleton<IMetalLimbService, MetalLimbService>();
 
 builder.Services.AddEndpointsApiExplorer();
