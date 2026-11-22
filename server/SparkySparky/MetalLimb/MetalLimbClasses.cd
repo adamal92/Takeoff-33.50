@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MetalLimb.XYZvector" Collapsed="true">
+    <Position X="10.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAE=</HashCode>
+      <FileName>EMFTranslatorMock.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MetalLimb.EMFTranslatorMock" Collapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>EMFTranslatorMock.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MetalLimb.FullMetalFingerMock" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAACAAAAAAIAAAAYAAAEAAQIIAAMASQAIAAEVgGAA=</HashCode>
+      <FileName>FullMetalFingerMock.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MetalLimb.GeoLocalPhysicsMock" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAIAQAAAAAAAgAAA=</HashCode>
+      <FileName>GeoLocalPhysicsMock.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MetalLimb.SensorControlMock" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAACAAAAAAIAAAAAAAAAAAAAAAAAACQAAAAAAAAAA=</HashCode>
+      <FileName>SensorControlMock.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="MetalLimb.IFullMetalFingerMock" Collapsed="true">
+    <Position X="3.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAEAAAAIAAEAQAAIAAEVAGAA=</HashCode>
+      <FileName>IFullMetalFingerMock.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MetalLimb.IGeoLocalPhysicsMock" Collapsed="true">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAQAAAAAAAgAAA=</HashCode>
+      <FileName>IGeoLocalPhysicsMock.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MetalLimb.ISensorControlMock" Collapsed="true">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAACAAAAAAIAAAAAAAAAAAAAAAAAACQAAAAAAAAAA=</HashCode>
+      <FileName>ISensorControlMock.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

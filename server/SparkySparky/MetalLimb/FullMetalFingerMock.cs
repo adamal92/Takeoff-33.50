@@ -142,5 +142,10 @@ namespace MetalLimb
         {
             this.sensorControlMock.ToggleSleepMode(isActivated);
         }
+
+        public StreamMock ReadGeoLocationStream()
+        {
+            return this.geoLocalPhysicsMock.ReadGeoLocationStream();
+        }
     }
 }

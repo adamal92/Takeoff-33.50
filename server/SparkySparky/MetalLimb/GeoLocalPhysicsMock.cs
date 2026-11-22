@@ -37,5 +37,20 @@ namespace MetalLimb
             Vector3 mockVector = Vector3.Zero;
             return ParseXYZvectorFromVector3(mockVector);
         }
+
+        /// <summary>
+        /// Reads the gyroscope vector.
+        /// </summary>
+        /// <returns>An <see cref="XYZvector"/> representing the gyroscope vector.</returns>
+        public XYZvector ReadGyroscopeV()
+        {
+            Vector3 mockVector = Vector3.Zero;
+            return ParseXYZvectorFromVector3(mockVector);
+        }
+
+        public StreamMock ReadGeoLocationStream()
+        {
+            return new StreamMock(new byte[0]);
+        }
     }
 }

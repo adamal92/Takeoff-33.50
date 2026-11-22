@@ -21,5 +21,11 @@ namespace MetalLimb
         /// </summary>
         /// <returns>A vector representing the acceleration values.</returns>
         public XYZvector ReadAccelerationV();
+
+        /// <summary>
+        /// Reads the geographic location stream.
+        /// </summary>
+        /// <returns>The geographic location stream.</returns>
+        public StreamMock ReadGeoLocationStream();
     }
 }

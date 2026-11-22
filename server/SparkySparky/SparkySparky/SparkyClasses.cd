@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SparkySparky.Controllers.HealthController" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Controllers\HealthController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SparkySparky.Controllers.MetalLimbController" Collapsed="true">
+    <Position X="6" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAABAAAAAAAAACAEAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Controllers\MetalLimbController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SparkySparky.Controllers.ObjectsController" Collapsed="true">
+    <Position X="4.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAIAAAAAAAAEAAEAAAgAQAAAAAAA=</HashCode>
+      <FileName>Controllers\ObjectsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SparkySparky.Controllers.PolygonsController" Collapsed="true">
+    <Position X="7.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAAAAAAAAAAAAAAAAAAAAAAEAEEAAAgAAAAAAAAA=</HashCode>
+      <FileName>Controllers\PolygonsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SparkySparky.Controllers.TheThirdEyeController" Collapsed="true">
+    <Position X="4.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAJAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\TheThirdEyeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SparkySparky.DTOs.CreateMapObjectRequest" Collapsed="true">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAQAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>DTOs\CreateMapObjectRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SparkySparky.DTOs.CreatePolygonRequest" Collapsed="true">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>DTOs\CreatePolygonRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SparkySparky.Models.GeoJsonGeometry" Collapsed="true">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\GeoJsonGeometry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SparkySparky.Models.GeoJsonGeometryParser" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAYAAAAABAAAAAAAAAEAAA=</HashCode>
+      <FileName>Models\GeoJsonGeometryParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SparkySparky.Models.JsonElementBsonSerializer" Collapsed="true">
+    <Position X="0.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAACBAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\JsonElementBsonSerializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SparkySparky.Models.MapObjectEntity" Collapsed="true">
+    <Position X="2.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAgAAACAAAAQAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Models\MapObjectEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SparkySparky.Models.PolygonEntity" Collapsed="true">
+    <Position X="6" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAACAAAAQAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Models\PolygonEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SparkySparky.Services.MapObjectService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAEAAAAAAAAAAAAgAAAAAAIAAAIA=</HashCode>
+      <FileName>Services\MapObjectService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SparkySparky.Services.MetalLimbService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAABAAAA=</HashCode>
+      <FileName>Services\MetalLimbService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SparkySparky.Services.MongoHealthChecker" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\MongoHealthChecker.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SparkySparky.Services.NeedleService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\NeedleService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SparkySparky.Services.PolygonService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAEAAAAAAAAAAAAgAAAAAAIAAAIA=</HashCode>
+      <FileName>Services\PolygonService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Program" Collapsed="true">
+    <Position X="2.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="SparkySparky.Services.IMapObjectService" Collapsed="true">
+    <Position X="0.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAIAAAIA=</HashCode>
+      <FileName>Services\IMapObjectService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SparkySparky.Services.IMetalLimbService" Collapsed="true">
+    <Position X="2.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Services\IMetalLimbService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SparkySparky.Services.IMongoHealthChecker" Collapsed="true">
+    <Position X="4.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\IMongoHealthChecker.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SparkySparky.Services.INeedleService" Collapsed="true">
+    <Position X="6" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\INeedleService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SparkySparky.Services.IPolygonService" Collapsed="true">
+    <Position X="7.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAIAAAIA=</HashCode>
+      <FileName>Services\IPolygonService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

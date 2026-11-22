@@ -88,5 +88,12 @@ namespace MetalLimb.Tests
             XYZvector accelVector = fingerMock.ReadAccelerationV();
             Assert.True(IsValidCoord(accelVector));
         }
+
+        [Fact]
+        public void ReadGeoLocationStream_ReturnsStream()
+        {
+            StreamMock geoStream = fingerMock.ReadGeoLocationStream();
+            Assert.IsAssignableFrom<Stream>(geoStream);
+        }
     }
 }
