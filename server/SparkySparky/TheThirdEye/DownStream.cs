@@ -21,7 +21,7 @@ namespace TheThirdEye
             throw new NotImplementedException();
         }
 
-        public Channel<XYZvector> SplitGeoLocationStream()
+        public Channel<XYZvector[]> SplitGeoLocationStream()
         {
             throw new NotImplementedException();
         }

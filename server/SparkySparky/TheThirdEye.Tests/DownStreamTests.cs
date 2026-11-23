@@ -36,7 +36,7 @@ namespace TheThirdEye.Tests
         [Fact]
         public void SplitGeoLocationStream_ReturnsChannel()
         {
-            Channel<XYZvector> result = downStream.SplitGeoLocationStream();
+            Channel<XYZvector[]> result = downStream.SplitGeoLocationStream();
             Assert.NotNull(result);
         }
     }
