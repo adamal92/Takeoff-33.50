@@ -21,7 +21,17 @@ namespace TheThirdEye
             throw new NotImplementedException();
         }
 
+        public void SetCancelationToken(CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
         public Channel<XYZvector[]> SplitGeoLocationStream()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StopGeoLocationStream()
         {
             throw new NotImplementedException();
         }

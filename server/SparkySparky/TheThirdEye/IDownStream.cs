@@ -9,6 +9,11 @@ using MetalAbs.SharedDTOs;
 
 namespace TheThirdEye
 {
+    /// <summary>
+    /// Breaks down a geolocation data stream into smaller chunks and hands them for concurrent processing.
+    /// Specifies the contract for downstream operations related to geolocation data streams.
+    /// Provides operations for retrieving and preparing geolocation data streams for processing.
+    /// </summary>
     public interface IDownStream
     {
         /// <summary>
@@ -28,5 +33,16 @@ namespace TheThirdEye
         /// </summary>
         /// <returns>A channel containing geolocation data.</returns>
         public Channel<XYZvector[]> SplitGeoLocationStream();
+
+        /// <summary>
+        /// Stops the geolocation stream processing and releases any associated resources.
+        /// </summary>
+        public void StopGeoLocationStream();
+
+        /// <summary>
+        /// Sets the cancellation token used to signal cancellation.
+        /// </summary>
+        /// <param name="cancellationToken">The cancellation token to observe.</param>
+        public void SetCancelationToken(CancellationToken cancellationToken);
     }
 }

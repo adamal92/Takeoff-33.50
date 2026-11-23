@@ -39,5 +39,20 @@ namespace TheThirdEye.Tests
             Channel<XYZvector[]> result = downStream.SplitGeoLocationStream();
             Assert.NotNull(result);
         }
+
+        [Fact]
+        public void StopGeoLocationStream_DoesNotThrow()
+        {
+            Exception ex = Record.Exception(() => downStream.StopGeoLocationStream());
+            Assert.Null(ex);
+        }
+
+        [Fact]
+        public void SetCancelationToken_DoesNotThrow()
+        {
+            CancellationToken cancellationToken = new CancellationToken();
+            Exception ex = Record.Exception(() => downStream.SetCancelationToken(cancellationToken));
+            Assert.Null(ex);
+        }
     }
 }
