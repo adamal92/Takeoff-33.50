@@ -97,5 +97,24 @@ namespace MetalLimb.Tests
             StreamMock geoStream = fingerMock.ReadGeoLocationStream();
             Assert.IsAssignableFrom<Stream>(geoStream);
         }
+
+        [Fact]
+        public void OpenVaultDoor_Succeeds()
+        {
+            this.fingerMock.OpenVaultDoor();
+        }
+
+        [Fact]
+        public void CloseVaultDoor_Succeeds()
+        {
+            this.fingerMock.CloseVaultDoor();
+        }
+
+        [Fact]
+        public void GetEMFStrength_ReturnsFloat()
+        {
+            float emfStrength = fingerMock.GetEMFStrength();
+            Assert.IsType<float>(emfStrength);
+        }
     }
 }
