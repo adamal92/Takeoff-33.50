@@ -27,6 +27,6 @@ namespace TheThirdEye
         /// Splits the geolocation stream to a channel for concurrent processing.
         /// </summary>
         /// <returns>A channel containing geolocation data.</returns>
-        public Channel<XYZvector> SplitGeoLocationStream();
+        public Channel<XYZvector[]> SplitGeoLocationStream();
     }
 }
