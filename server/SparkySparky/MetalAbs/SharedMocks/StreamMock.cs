@@ -1,4 +1,4 @@
-﻿namespace MetalLimb
+﻿namespace MetalAbs.SharedMocks
 {
     public class StreamMock : MemoryStream
     {

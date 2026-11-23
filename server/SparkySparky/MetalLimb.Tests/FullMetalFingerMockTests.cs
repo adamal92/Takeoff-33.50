@@ -1,3 +1,5 @@
+using MetalAbs.SharedDTOs;
+using MetalAbs.SharedMocks;
 using MetalLimb;
 
 namespace MetalLimb.Tests

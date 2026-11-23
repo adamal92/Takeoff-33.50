@@ -1,14 +1,8 @@
-﻿using System.Numerics;
+﻿using MetalAbs.SharedDTOs;
+using System.Numerics;
 
 namespace MetalLimb
 {
-    public sealed class XYZvector
-    {
-        public float X { get; set; }
-        public float Y { get; set; }
-        public float Z { get; set; }
-    }
-
     public sealed class EMFTranslatorMock
     {
         /// <summary>
